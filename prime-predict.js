@@ -1,14 +1,14 @@
 /*!
  * Bullwaves Prime Predict Widget
- * Webflow usage:
  *
- * <div id="bullwaves-prime-predict"></div>
- * <script src="https://cdn.jsdelivr.net/gh/USERNAME/REPO/bullwaves-prime-predict.js" defer></script>
+ * Webflow embed:
+ * <div id="prime-predict-widget"></div>
+ * <script src="https://bullwaves.github.io/bullwavesprime/prime-predict.js" defer></script>
  *
  * Optional:
  * <script
- *   src="https://cdn.jsdelivr.net/gh/USERNAME/REPO/bullwaves-prime-predict.js"
- *   data-target="#bullwaves-prime-predict"
+ *   src="https://bullwaves.github.io/bullwavesprime/prime-predict.js"
+ *   data-target="#prime-predict-widget"
  *   data-signal-link="https://prime.bullwaves.com"
  *   data-start-link="https://prime.bullwaves.com"
  *   data-account-size="$5,000"
@@ -21,14 +21,20 @@
   "use strict";
 
   const WIDGET_ID = "bullwaves-prime-predict";
+  const ALT_WIDGET_ID = "prime-predict-widget";
   const STYLE_ID = "bullwaves-prime-predict-style";
   const CHART_SRC = "https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js";
 
-  const currentScript = document.currentScript || document.querySelector('script[src*="bullwaves-prime-predict"]');
+  const currentScript =
+    document.currentScript ||
+    document.querySelector('script[src*="prime-predict"]') ||
+    document.querySelector('script[src*="bullwaves-prime-predict"]');
 
   const config = {
     apiKey: currentScript?.dataset?.apiKey || "kewr2QFtJuJYuGNtDpMjR81Ecp15OzQ3",
-    target: currentScript?.dataset?.target || "#" + WIDGET_ID,
+    target:
+      currentScript?.dataset?.target ||
+      (document.getElementById(ALT_WIDGET_ID) ? "#" + ALT_WIDGET_ID : "#" + WIDGET_ID),
     signalLink: currentScript?.dataset?.signalLink || "#signal-link",
     startLink: currentScript?.dataset?.startLink || "#start-link",
     accountSize: currentScript?.dataset?.accountSize || "$5,000",
@@ -101,11 +107,11 @@
     style.id = STYLE_ID;
 
     style.textContent = `
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
 :root {
   --bpm-blue: #0036ff;
-  --bpm-text: #09090b;
+  --bpm-text: #08080c;
   --bpm-muted: #6b7280;
   --bpm-light: #9ca3af;
   --bpm-border: #e5e7eb;
@@ -172,7 +178,7 @@
   color: #7a8495;
   font-size: 13px;
   line-height: 1.2;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 6px;
 }
 
@@ -182,7 +188,7 @@
   font-size: clamp(30px, 3vw, 44px);
   line-height: 1;
   letter-spacing: -0.045em;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .bpm-meta {
@@ -203,7 +209,7 @@
   color: #6b7280;
   font-size: 12px;
   line-height: 1;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .bpm-live-meta {
@@ -213,13 +219,13 @@
   color: #7a8495;
   font-size: 13px;
   line-height: 1;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .bpm-live-meta strong {
   color: var(--bpm-green);
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .bpm-live-dot {
@@ -243,7 +249,7 @@
   justify-content: center;
   white-space: nowrap;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   box-shadow: 0 14px 28px rgba(0, 54, 255, 0.18);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
@@ -256,7 +262,7 @@
 
 .bpm-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.42fr);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.42fr);
   gap: 14px;
   align-items: start;
 }
@@ -310,7 +316,7 @@
   font-size: 38px;
   line-height: 1;
   letter-spacing: -0.05em;
-  font-weight: 600;
+  font-weight: 700;
   transition: transform 0.25s ease, color 0.25s ease;
 }
 
@@ -329,7 +335,7 @@
   color: var(--bpm-light);
   font-size: 13px;
   line-height: 1.2;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .bpm-delta.positive {
@@ -354,7 +360,7 @@
   background: #ecfdf3;
   color: var(--bpm-green);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: 9px;
 }
 
@@ -368,7 +374,7 @@
 
 .bpm-live-pill strong {
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .bpm-chart-side small {
@@ -376,7 +382,7 @@
   color: #9ca3af;
   font-size: 12px;
   line-height: 1.2;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .bpm-chart-side em {
@@ -386,7 +392,7 @@
   font-size: 12px;
   line-height: 1.2;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .bpm-chart-shell {
@@ -399,7 +405,7 @@
   overflow: hidden;
 }
 
-#bpmChart {
+.bpm-chart-shell canvas {
   width: 100% !important;
   height: 100% !important;
 }
@@ -420,7 +426,7 @@
   color: #7a8495;
   font-size: 12px;
   line-height: 1;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
@@ -453,7 +459,7 @@
   color: #7a8495;
   font-size: 12px;
   line-height: 1.2;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 7px;
 }
 
@@ -463,7 +469,7 @@
   font-size: 21px;
   line-height: 1;
   letter-spacing: -0.04em;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .bpm-stat-box small {
@@ -472,7 +478,7 @@
   color: #9ca3af;
   font-size: 11px;
   line-height: 1.2;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .bpm-outcome-card {
@@ -494,7 +500,7 @@
   font-size: 26px;
   line-height: 1.08;
   letter-spacing: -0.04em;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .bpm-outcomes {
@@ -548,7 +554,7 @@
   display: grid;
   place-items: center;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 800;
   flex: 0 0 auto;
 }
 
@@ -572,7 +578,7 @@
   font-size: 16px;
   line-height: 1.15;
   letter-spacing: -0.025em;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .bpm-outcome-copy span {
@@ -581,7 +587,7 @@
   color: #7a8495;
   font-size: 12px;
   line-height: 1.35;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .bpm-outcome-market {
@@ -619,7 +625,7 @@
   font-size: 22px;
   line-height: 1;
   letter-spacing: -0.045em;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .bpm-outcome-yes .bpm-outcome-market strong {
@@ -638,7 +644,7 @@
   color: #ffffff;
   font-size: 13px;
   line-height: 1;
-  font-weight: 600;
+  font-weight: 800;
   cursor: pointer;
   transition: transform 0.18s ease, opacity 0.18s ease;
 }
@@ -680,13 +686,13 @@
   color: #111827;
   font-size: 13px;
   line-height: 1;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .bpm-live-activity-head small {
   color: #9ca3af;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .bpm-bet-stage {
@@ -767,7 +773,7 @@
   color: #111827;
   font-size: 13px;
   line-height: 1.15;
-  font-weight: 600;
+  font-weight: 800;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -779,7 +785,7 @@
   color: #7a8495;
   font-size: 12px;
   line-height: 1.2;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .bpm-order-side {
@@ -791,7 +797,7 @@
   display: block;
   font-size: 14px;
   line-height: 1.1;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .bpm-order-toast.is-yes .bpm-order-side b {
@@ -808,11 +814,13 @@
   color: #9ca3af;
   font-size: 11px;
   line-height: 1;
+  font-weight: 600;
 }
 
 .bpm-signal-card {
-  padding: 24px;
+  padding: 22px;
   margin-bottom: 12px;
+  overflow: hidden;
 }
 
 .bpm-signal-head {
@@ -820,37 +828,37 @@
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 
 .bpm-signal-head h3 {
   margin: 0;
   color: #0b0b0f;
-  font-size: 24px;
-  line-height: 1.02;
+  font-size: 22px;
+  line-height: 1.03;
   letter-spacing: -0.045em;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .bpm-lock-pill {
-  min-height: 34px;
-  padding: 0 14px;
+  min-height: 32px;
+  padding: 0 13px;
   border-radius: 999px;
   background: var(--bpm-blue);
   color: #ffffff;
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  box-shadow: 0 12px 26px rgba(0, 54, 255, 0.22);
-  font-size: 13px;
+  box-shadow: 0 12px 26px rgba(0, 54, 255, 0.2);
+  font-size: 12px;
   line-height: 1;
-  font-weight: 700;
+  font-weight: 800;
   flex: 0 0 auto;
 }
 
 .bpm-lock-pill svg {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   fill: none;
   stroke: currentColor;
   stroke-width: 2.4;
@@ -860,40 +868,47 @@
 
 .bpm-signal-box {
   position: relative;
-  min-height: 365px;
+  min-height: 315px;
   overflow: hidden;
   border-radius: 16px;
   background: #ffffff;
 }
 
+.bpm-signal-list {
+  position: relative;
+  z-index: 1;
+}
+
 .bpm-signal-row {
-  min-height: 54px;
+  min-height: 47px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 14px;
-  border-bottom: 1px solid #ebebee;
+  border-bottom: 1px solid #ececf0;
 }
 
 .bpm-signal-row span {
   color: #858585;
-  font-size: 17px;
+  font-size: 14px;
   line-height: 1;
-  letter-spacing: -0.025em;
-  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
 .bpm-signal-row strong {
   color: #111827;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1;
-  font-weight: 700;
-  filter: blur(7px);
-  opacity: 0.62;
+  font-weight: 800;
+  filter: blur(6px);
+  opacity: 0.55;
   user-select: none;
   pointer-events: none;
   white-space: nowrap;
-  max-width: 130px;
+  max-width: 112px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .bpm-signal-unlock {
@@ -901,33 +916,34 @@
   left: 0;
   right: 0;
   bottom: 0;
-  min-height: 150px;
-  padding: 24px 0 0;
+  min-height: 137px;
+  padding: 26px 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.18) 0%,
-    rgba(255, 255, 255, 0.88) 28%,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.92) 24%,
     #ffffff 100%
   );
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(1.5px);
+  z-index: 3;
 }
 
 .bpm-unlock-icon {
-  width: 22px;
-  height: 22px;
-  margin-bottom: 8px;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 7px;
   color: #0b0b0f;
   display: grid;
   place-items: center;
 }
 
 .bpm-unlock-icon svg {
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   fill: none;
   stroke: currentColor;
   stroke-width: 2.4;
@@ -938,24 +954,24 @@
 .bpm-signal-unlock h4 {
   margin: 0 0 7px;
   color: #0b0b0f;
-  font-size: 19px;
-  line-height: 1;
+  font-size: 17px;
+  line-height: 1.05;
   letter-spacing: -0.035em;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .bpm-signal-unlock p {
-  max-width: 260px;
-  margin: 0 auto 16px;
+  max-width: 245px;
+  margin: 0 auto 15px;
   color: #858585;
-  font-size: 13px;
+  font-size: 12.5px;
   line-height: 1.35;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .bpm-signal-unlock a {
   width: 100%;
-  min-height: 46px;
+  min-height: 42px;
   border-radius: 12px;
   background: var(--bpm-blue);
   color: #ffffff;
@@ -963,17 +979,17 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 15px;
   line-height: 1;
-  letter-spacing: -0.03em;
-  font-weight: 700;
-  box-shadow: 0 16px 34px rgba(0, 54, 255, 0.22);
+  letter-spacing: -0.025em;
+  font-weight: 800;
+  box-shadow: 0 14px 30px rgba(0, 54, 255, 0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .bpm-signal-unlock a:hover {
   transform: translateY(-2px);
-  box-shadow: 0 20px 42px rgba(0, 54, 255, 0.28);
+  box-shadow: 0 18px 38px rgba(0, 54, 255, 0.26);
 }
 
 .bpm-account-card {
@@ -1002,7 +1018,7 @@
 .bpm-account-row span {
   color: #7a8495;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .bpm-account-row strong {
@@ -1010,7 +1026,7 @@
   font-size: 17px;
   line-height: 1;
   letter-spacing: -0.03em;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .bpm-mini-card {
@@ -1031,7 +1047,7 @@
   display: block;
   color: #7a8495;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 4px;
 }
 
@@ -1041,7 +1057,7 @@
   font-size: 18px;
   line-height: 1;
   letter-spacing: -0.04em;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .bpm-mini-card small {
@@ -1050,7 +1066,7 @@
   color: #7a8495;
   font-size: 12px;
   line-height: 1.35;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .bpm-risk {
@@ -1059,7 +1075,7 @@
   font-size: 12px;
   line-height: 1.45;
   text-align: center;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .bpm-overlay {
@@ -1178,7 +1194,7 @@
   color: #111827;
   font-size: 15px;
   line-height: 1.18;
-  font-weight: 600;
+  font-weight: 800;
   letter-spacing: -0.025em;
 }
 
@@ -1186,7 +1202,7 @@
   color: #111827;
   font-size: 20px;
   line-height: 1;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .bpm-demo-bar {
@@ -1226,7 +1242,7 @@
   min-height: 39px;
   color: #ffffff;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .bpm-demo-actions button:first-child {
@@ -1255,7 +1271,7 @@
 .bpm-modal-step {
   color: #7a8495;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 10px;
 }
 
@@ -1265,7 +1281,7 @@
   font-size: 25px;
   line-height: 1.08;
   letter-spacing: -0.04em;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .bpm-modal-body p {
@@ -1273,7 +1289,7 @@
   color: #6b7280;
   font-size: 15px;
   line-height: 1.45;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .bpm-modal-dots {
@@ -1303,7 +1319,7 @@
   background: var(--bpm-blue);
   color: #ffffff;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 800;
   cursor: pointer;
   box-shadow: 0 14px 30px rgba(0, 54, 255, 0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -1474,50 +1490,57 @@
   }
 
   .bpm-signal-card {
-    padding: 22px 18px;
+    padding: 20px 18px;
   }
 
   .bpm-signal-head {
-    margin-bottom: 20px;
+    margin-bottom: 17px;
   }
 
   .bpm-signal-head h3 {
-    font-size: 23px;
+    font-size: 21px;
   }
 
   .bpm-lock-pill {
-    min-height: 32px;
-    padding: 0 13px;
+    min-height: 31px;
+    padding: 0 12px;
     font-size: 12px;
   }
 
   .bpm-signal-box {
-    min-height: 350px;
+    min-height: 305px;
   }
 
   .bpm-signal-row {
-    min-height: 52px;
+    min-height: 45px;
   }
 
   .bpm-signal-row span {
-    font-size: 16px;
+    font-size: 14px;
+  }
+
+  .bpm-signal-row strong {
+    font-size: 11.5px;
+    max-width: 108px;
   }
 
   .bpm-signal-unlock {
-    min-height: 145px;
+    min-height: 134px;
+    padding-top: 24px;
   }
 
   .bpm-signal-unlock h4 {
-    font-size: 18px;
+    font-size: 16.5px;
   }
 
   .bpm-signal-unlock p {
-    font-size: 13px;
+    font-size: 12px;
+    max-width: 230px;
   }
 
   .bpm-signal-unlock a {
-    min-height: 44px;
-    font-size: 16px;
+    min-height: 41px;
+    font-size: 14.5px;
   }
 
   .bpm-modal {
@@ -1572,29 +1595,43 @@
     font-size: 23px;
   }
 
+  .bpm-signal-card {
+    padding: 19px 16px;
+  }
+
   .bpm-signal-head h3 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .bpm-lock-pill {
-    font-size: 12px;
-    padding: 0 12px;
+    font-size: 11px;
+    padding: 0 11px;
+    min-height: 30px;
   }
 
   .bpm-signal-box {
-    min-height: 340px;
+    min-height: 296px;
+  }
+
+  .bpm-signal-row {
+    min-height: 43px;
   }
 
   .bpm-signal-row span {
-    font-size: 15px;
+    font-size: 13.5px;
   }
 
   .bpm-signal-row strong {
-    max-width: 120px;
+    max-width: 102px;
+    font-size: 11px;
+  }
+
+  .bpm-signal-unlock {
+    min-height: 130px;
   }
 
   .bpm-signal-unlock a {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .bpm-order-copy strong {
@@ -1755,29 +1792,31 @@
           </div>
 
           <div class="bpm-signal-box">
-            <div class="bpm-signal-row">
-              <span>Setup</span>
-              <strong data-bpm="signal">BUY XAU/USD</strong>
-            </div>
+            <div class="bpm-signal-list">
+              <div class="bpm-signal-row">
+                <span>Setup</span>
+                <strong data-bpm="signal">BUY XAU/USD</strong>
+              </div>
 
-            <div class="bpm-signal-row">
-              <span>Entry</span>
-              <strong data-bpm="entry">3,320.00</strong>
-            </div>
+              <div class="bpm-signal-row">
+                <span>Entry</span>
+                <strong data-bpm="entry">3,320.00</strong>
+              </div>
 
-            <div class="bpm-signal-row">
-              <span>Take profit</span>
-              <strong data-bpm="tp">3,328.50</strong>
-            </div>
+              <div class="bpm-signal-row">
+                <span>Take profit</span>
+                <strong data-bpm="tp">3,328.50</strong>
+              </div>
 
-            <div class="bpm-signal-row">
-              <span>Stop loss</span>
-              <strong data-bpm="sl">3,314.80</strong>
-            </div>
+              <div class="bpm-signal-row">
+                <span>Stop loss</span>
+                <strong data-bpm="sl">3,314.80</strong>
+              </div>
 
-            <div class="bpm-signal-row">
-              <span>Risk</span>
-              <strong data-bpm="risk">Low / Med</strong>
+              <div class="bpm-signal-row">
+                <span>Risk</span>
+                <strong data-bpm="risk">Low / Med</strong>
+              </div>
             </div>
 
             <div class="bpm-signal-unlock">
